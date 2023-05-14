@@ -41,18 +41,19 @@ testT=1;  %Initialisation de la variable de test de la Temparute
 
 %PARTIE ALGORITHME DE CALCUL
         
-iter=0; % Initialisation de la variable qui permet de donner le nombre d'itération que la boucle a éffectué
+iter=0; % Initialisation de la variable qui permet de donner le nombre d'itérations que la boucle a éffectué.
     
 while (testpr>precision)
     % La boucle 'While' va permettre de faire le tour de la matrice autant de fois que besoin pour avoir la
-    % précision demandé
+    % précision demandée.
   testpr=0;
-  LargeurTampon = 0.005; %permet de créer la matrice Y
+  LargeurTampon = 0.005; %Permet de créer la matrice Y.
     for i = 1:imax
     
         %Partie du pas variable
-        % dy1 représente la distance entre la maille et celle juste au-dessus (la précédante), pour la première maille, celle distance vaut 0 mais il n'y a pas de précédante, ce n'est donc pas un prblème
-        % dy2 de la même manière est la distance entre le maille et celle au-dessous (la suivante), dy2 pour la dernière maille vaut 0, plus de maille suivante
+        % dy1 représente la distance entre la maille et celle juste au-dessus (la précédente), 
+        % pour la première maille, cette distance vaut 0 mais il n'y a pas de précédente, ce n'est donc pas un problème.
+        % dy2 de la même manière est la distance entre le maille et celle en-dessous (la suivante), dy2 pour la dernière maille vaut 0, pas de maille suivante
         % L'évolution des dy est linéaire croissante jusqu'à la moitié puis décroissante de pente opposé après la moitié 
         % Initialisation du dy avant (dy1) et après (dy2) maille 
         
@@ -66,8 +67,8 @@ while (testpr>precision)
             dy1=(hauteur*4/(imax^2))*(imax-i+1);
             dy2=(hauteur*4/(imax^2))*(imax-i);
         end
-        LargeurTampon = LargeurTampon - dy1; % Va permettre de contruire le vecteur position Y
-        Y(i) = LargeurTampon;  % On remarque que le vecteur Y est contruit à l'envers, il commence à 0.005 et non à 0
+        LargeurTampon = LargeurTampon - dy1; % Va permettre de construire le vecteur position Y
+        Y(i) = LargeurTampon;  % On remarque que le vecteur Y est construit à l'envers, il commence à 0.005 et non à 0
                                % Il sera inversé lors de son utilisation.
         if i>=imax
             Y(i)=0;
@@ -118,7 +119,7 @@ while (testpr>precision)
 
             end
 
-            if i == 1       % On regarde les températures sur la surface éxtérieur de la vitre
+            if i == 1       % On regarde les températures sur la surface extérieure de la vitre
                 
                 Tpe(1,j)=T(i,j);
 
@@ -140,21 +141,21 @@ end
 if T(1,jmax) >= T0 %T(1,jmax) represente la T° en haut à droite, car 1ère ligne et jème colonne
     title(sprintf('Itération = %d, Température minimum respecté',iter)); 
 else
-    title(sprintf('Itération = %d, Température minimum non respecté',iter)); 
+    title(sprintf('Itération = %d, Température minimum non respectée',iter)); 
 end
 
 %PARTIE AFFICHAGE 
 
-      % Affichage de la température sur la vitre extérieur
+      % Affichage de la température sur la vitre extérieure
 plot(Tpe);
 
-        % Affichage des température en tout point
+        % Affichage des températures en tout point
 subplot(2, 1, 1); % Mettre plusieurs sous graphiques dans la même fenêtre, ici le 1
-colormap(jet); % Choix de la palette de couleur : "jet"
+colormap(jet); % Choix de la palette de couleurs : "jet"
 %imagesc(X, flip(Y), T); % Affichage sans la grille, 'flip()' permet d'inverser un vecteur
 pcolor(X, Y, T); % Permet d'afficher me maillage 
 
-        % Affichage flux de chaleur
+        % Affichage du flux de chaleur
 subplot(2, 1, 2); % Mettre plusieurs sous graphiques dans la même fenêtre, ici le 2
 contour(X, Y, T,10); % Tracer les courbes de niveaux de la matrice T, le '8' correspond au nombre de courbes desirées, 'flip()' permet d'inverser un vecteur
 hold on;
